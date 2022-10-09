@@ -34,6 +34,7 @@ class UserSeeder extends Seeder
         $adminRole->givePermissionTo('create');
         $adminRole->givePermissionTo('update');
         $adminRole->givePermissionTo('delete');
+        $adminRole->givePermissionTo('get_data');
         $adminRole->givePermissionTo('get_statistic');
 
         $userRole = Role::create(['name' => 'user']);
