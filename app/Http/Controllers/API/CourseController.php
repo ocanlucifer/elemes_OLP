@@ -8,17 +8,41 @@ use App\Http\Resources\CourseResource;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class CourseController extends BaseController
 {
+    public function __construct()
+    {
+        $this->middleware('permission:get_data', ['only' => ['index', 'show']]);
+        $this->middleware('permission:get_statistic', ['only' => ['get_statistics']]);
+        $this->middleware('permission:create', ['only' => ['store']]);
+        $this->middleware('permission:update', ['only' => ['update']]);
+        $this->middleware('permission:delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $course = Course::with('user_c', 'user_u', 'category')->get();
+        $course_name = $request->course_name;
+        $description = $request->description;
+        $sort = $request->sort;
+        $freeCourese = '';
+        $sort_by = 'ASC';
+        if ($sort == 2) {
+            $sort_by = 'DESC';
+        } else if ($sort == 3) {
+            $freeCourese = 0;
+        }
+        $course = Course::with('user_c', 'user_u', 'category')
+            ->where('course_name', 'like', '%' . $course_name . '%')
+            ->where('description', 'like', '%' . $description . '%')
+            ->where('price', 'like', $freeCourese . '%')
+            ->orderBy('price', $sort_by)
+            ->get();
         return $this->sendResponse(CourseResource::collection($course), 'Course Retrieve Successfully');
     }
 

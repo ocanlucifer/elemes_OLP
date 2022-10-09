@@ -9,6 +9,13 @@ use App\Models\Category;
 
 class CategoryController extends BaseController
 {
+    public function __construct()
+    {
+        $this->middleware('permission:get_data', ['only' => ['index', 'popularCategory', 'show']]);
+        $this->middleware('permission:create', ['only' => ['store']]);
+        $this->middleware('permission:update', ['only' => ['update']]);
+        $this->middleware('permission:delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
