@@ -37,6 +37,7 @@ b. Cara Setup dan menjalankan di local Environment:
     - jika semua telah selesai saatnya menjalankan perintah "php artisan serve" di terminal.
     - lalu coba test menggunakan Postman, jangan lupa import dulu postmancolection nya yang ada di folder /docs.
     - Login menggunakan username dan password yang telah di sediakan atau bisa juga register baru dan akan otomatis mendapat role "User"
+    - Semua user bisa upload, update, delete, dan get profile picture with Cloudinary (cridential cloudinary sudah ada di .env.example, dapat di ganti jika di perlukan)
 
 c. Login Cridential:
 
