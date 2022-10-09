@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,16 @@ class UserController extends BaseController
     public function __construct()
     {
         $this->middleware('permission:delete', ['only' => ['delete_user']]);
+    }
+
+    public function user_info()
+    {
+        $id = auth()->user()->id;
+        $user = User::with('user_pp')->find($id);
+        if ($user) {
+            return $this->sendResponse(new UserResource($user), 'User Info Retrieved');
+        }
+        return $this->sendError('category not found');
     }
     /**
      * Register api

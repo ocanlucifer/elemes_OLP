@@ -6,9 +6,12 @@ a. tech spec:
 
     - Framework : laravel versi 9.32.0
     - database : mysql
-    - package: default laravel dan untuk auth nya saya menggunakan laravel/sanctum yang juga sudah ter install bersamaan dengan penginstallan laravel nya. serta untuk manage role dan permissions saya gunakan package spatie/laravel.
+    - package:  *   default laravel
+                *   laravel/sanctum (Auth)
+                *   spatie/laravel (manage Role And Permissions).
+                *   cloudinary-labs/cloudinary-laravel (Upload image ke Cloudinary)
     - PHP version 8.1.9 (cli) (built: Aug  4 2022 15:12:55) (NTS)
-    - Semua API URL ada di postman.collection yang ada di folder /docs.
+    - Semua API URL ada di Elemes_OLP.postman_collection.json yang ada di folder /docs.
     - route api ada di file routes/api.php.
     - migration ada di folder /database/migrations/.
     - model ada di app/Models/.
